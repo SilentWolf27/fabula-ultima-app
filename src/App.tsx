@@ -4,12 +4,15 @@ import Home from "./pages/Home";
 import Characters from "./pages/Characters";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./auth/pages/Login";
+import { AuthRoute } from "./session/components/AuthRoute";
 
 export default function App() {
   return (
     <Routes>
-      {/* Auth routes */}
-      <Route path="login" element={<Login />} />
+      {/* Auth routes - only accessible when NOT authenticated */}
+      <Route element={<AuthRoute />}>
+        <Route path="login" element={<Login />} />
+      </Route>
 
       {/* App routes */}
       <Route path="/" element={<Layout />}>

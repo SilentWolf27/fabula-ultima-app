@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Session, User } from "@supabase/supabase-js";
+import type { Session } from "@supabase/supabase-js";
 import { createClient } from "../../supabase/clients/browser";
 
 interface SessionContextValue {
