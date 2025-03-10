@@ -23,7 +23,7 @@ export function LoginForm() {
   };
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <form className="space-y-6 font-body" onSubmit={handleSubmit(onSubmit)}>
       <fieldset>
         <div className="space-y-4">
           <div>
