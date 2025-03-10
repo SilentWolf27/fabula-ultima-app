@@ -1,18 +1,29 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData, loginSchema } from "../schemas/login";
+import { useAuth } from "../hooks/useAuth";
+import { buildErrorFromSupabase } from "../../supabase/errors/supabase";
 
 export function LoginForm() {
+  const { login } = useAuth();
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log(data);
+    try {
+      await login(data);
+    } catch (err: any) {
+      setError("root.serverError", {
+        message: buildErrorFromSupabase(err.code).message,
+      });
+    }
   };
 
   return (
@@ -20,6 +31,14 @@ export function LoginForm() {
       className="flex flex-col gap-4"
       onSubmit={handleSubmit(onSubmit)}
       noValidate>
+      {errors.root?.serverError && (
+        <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+          <p className="text-sm text-red-600">
+            {errors.root.serverError.message}
+          </p>
+        </div>
+      )}
+
       <div className="flex flex-col gap-2">
         <label
           htmlFor="email"

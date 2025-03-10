@@ -1,13 +1,12 @@
-import {
-  createClient as createBrowserClient,
-  SupabaseClient,
-} from "@supabase/supabase-js";
+import { createBrowserClient } from "@supabase/ssr";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const createClient = (): SupabaseClient => {
-  const { SUPABASE_URL, SUPABASE_ANON_KEY } = process.env;
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY)
+  if (!supabaseUrl || !supabaseAnonKey)
     throw new Error("Could not find Supabase URL or Supabase Anon Key");
 
-  return createBrowserClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  return createBrowserClient(supabaseUrl, supabaseAnonKey);
 };
