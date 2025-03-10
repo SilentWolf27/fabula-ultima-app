@@ -1,15 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Session } from "@supabase/supabase-js";
+import type { Session, User } from "@supabase/supabase-js";
 import { createClient } from "../../supabase/clients/browser";
 
 interface SessionContextValue {
   session: Session | null;
+  user: User | null;
   loading: boolean;
   isAuthenticated: boolean;
 }
 
 const defaultValue: SessionContextValue = {
   session: null,
+  user: null,
   loading: true,
   isAuthenticated: false,
 };
@@ -47,11 +49,12 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   const value: SessionContextValue = {
     session,
+    user: session?.user ?? null,
     loading,
     isAuthenticated: !!session,
   };
 
   console.log(value);
 
-  return <SessionContext value={value}>{children}</SessionContext>;
+  return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }
