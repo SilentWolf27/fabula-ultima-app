@@ -9,7 +9,7 @@ export default function Login() {
             <h1 className="text-4xl font-medieval font-semibold text-gray-900 mb-2 text-balance">
               Fabula Ultima DnD App
             </h1>
-            <p className="mt-2 text-gray-700 font-fantasy text-sm">
+            <p className="mt-4 text-gray-700 font-fantasy text-sm">
               Ingresa tus credenciales para acceder a tu cuenta
             </p>
           </header>
