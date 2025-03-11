@@ -12,7 +12,7 @@ export function MobileMenu({ isOpen, onClose, userEmail }: MobileMenuProps) {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 bg-black/30 bg-opacity-50 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 bg-black/30 bg-opacity-50 transition-opacity duration-300 lg:hidden z-40 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
@@ -20,7 +20,7 @@ export function MobileMenu({ isOpen, onClose, userEmail }: MobileMenuProps) {
 
       {/* Menu Panel */}
       <div
-        className={`fixed top-0 right-0 h-dvh w-64 bg-white shadow-lg transition-translate duration-300 ease-in-out lg:hidden ${
+        className={`fixed top-0 right-0 h-dvh w-64 bg-white shadow-lg transition-translate duration-300 ease-in-out lg:hidden z-50 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}>
         <div className="p-6">
