@@ -17,4 +17,4 @@ export function DesktopNav({ userEmail }: DesktopNavProps) {
       </div>
     </nav>
   );
-} 
+}
