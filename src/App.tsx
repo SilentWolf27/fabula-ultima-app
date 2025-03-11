@@ -6,6 +6,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Login from "./auth/pages/Login";
 import { AuthRoute } from "./session/components/AuthRoute";
 import { ProtectedRoute } from "./session/components/ProtectedRoute";
+import { ProfilePage } from "./profile/pages/ProfilePage";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="personajes" element={<Characters />} />
           <Route path="historias" element={<Characters />} />
+          <Route path="perfil" element={<ProfilePage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Route>
