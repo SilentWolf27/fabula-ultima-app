@@ -6,7 +6,10 @@ import ErrorPage from "./pages/ErrorPage";
 import Login from "./auth/pages/Login";
 import { AuthRoute } from "./session/components/AuthRoute";
 import { ProtectedRoute } from "./session/components/ProtectedRoute";
+import { MasterProtectedRoute } from "./session/components/MasterProtectedRoute";
+import { PlayerProtectedRoute } from "./session/components/PlayerProtectedRoute";
 import { ProfilePage } from "./profile/pages/ProfilePage";
+import StoryBuilder from "./pages/StoryBuilder";
 
 export default function App() {
   return (
@@ -16,14 +19,27 @@ export default function App() {
         <Route path="login" element={<Login />} />
       </Route>
 
-      {/* Protected routes - only accessible when authenticated */}
+      {/* Base protected routes - accessible by any authenticated user */}
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="personajes" element={<Characters />} />
-          <Route path="historias" element={<Characters />} />
           <Route path="perfil" element={<ProfilePage />} />
           <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Route>
+
+      {/* Master routes */}
+      <Route element={<MasterProtectedRoute />}>
+        <Route element={<Layout />}>
+          <Route path="creador-historias" element={<StoryBuilder />} />
+        </Route>
+      </Route>
+
+      {/* Player routes */}
+      <Route element={<PlayerProtectedRoute />}>
+        <Route element={<Layout />}>
+          <Route path="personajes" element={<Characters />} />
+          <Route path="historias" element={<Characters />} />
         </Route>
       </Route>
     </Routes>
