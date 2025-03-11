@@ -1,7 +1,7 @@
 import { MouseEventHandler } from "react";
 import { NavItem } from "./NavItem";
 import { NavLink } from "react-router";
-
+import LogoutButton from "../../auth/components/LogoutButton";
 interface Props {
   isOpen: boolean;
   onClose: MouseEventHandler<any>;
@@ -62,10 +62,11 @@ export function MobileMenu({ isOpen, onClose, userEmail }: Props) {
             <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col gap-4">
               <NavLink
                 to="/perfil"
-                className="text-sm text-gray-700 hover:text-indigo-600"
+                className="text-sm text-gray-700 hover:text-indigo-600 px-2 py-1"
                 onClick={onClose}>
                 Tu Perfil
               </NavLink>
+              <LogoutButton />
             </div>
           </nav>
         </div>

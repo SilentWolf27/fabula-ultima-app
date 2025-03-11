@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import { ContextMenu } from "../context-menu/ContextMenu";
 import { MenuItem } from "../context-menu/MenuItem";
+import LogoutButton from "../../auth/components/LogoutButton";
 
 interface Props {
   userEmail?: string | null;
@@ -47,7 +48,10 @@ export function UserMenu({ userEmail }: Props) {
         </button>
       )}>
       <MenuItem>
-        <NavLink to="/perfil">Tu Perfil</NavLink>
+        <NavLink className="px-2" to="/perfil">Tu Perfil</NavLink>
+      </MenuItem>
+      <MenuItem>
+        <LogoutButton />
       </MenuItem>
     </ContextMenu>
   );
