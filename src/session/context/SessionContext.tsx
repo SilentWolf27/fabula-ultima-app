@@ -1,13 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Session, User } from "@supabase/supabase-js";
+import type { Session } from "@supabase/supabase-js";
 import { createClient } from "../../supabase/clients/browser";
-
-interface SessionContextValue {
-  session: Session | null;
-  user: User | null;
-  loading: boolean;
-  isAuthenticated: boolean;
-}
+import type { SessionContextValue, UserWithProfile } from "../interfaces/session";
+import { getProfileFromSession } from "../utils/claims";
 
 const defaultValue: SessionContextValue = {
   session: null,
@@ -29,12 +24,26 @@ export function useSession() {
 export function SessionProvider({ children }: { children: React.ReactNode }) {
   const supabase = createClient();
   const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<UserWithProfile | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const updateUser = (session: Session | null) => {
+    if (!session) {
+      setUser(null);
+      return;
+    }
+
+    const profile = getProfileFromSession(session);
+    setUser({
+      ...session.user,
+      profile,
+    });
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      console.log(session);
       setSession(session);
+      updateUser(session);
       setLoading(false);
     });
 
@@ -42,6 +51,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      updateUser(session);
       setLoading(false);
     });
 
@@ -50,7 +60,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   const value: SessionContextValue = {
     session,
-    user: session?.user ?? null,
+    user,
     loading,
     isAuthenticated: !!session,
   };
