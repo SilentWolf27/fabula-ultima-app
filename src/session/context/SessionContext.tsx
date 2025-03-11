@@ -33,6 +33,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log(session);
       setSession(session);
       setLoading(false);
     });
@@ -53,8 +54,6 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     loading,
     isAuthenticated: !!session,
   };
-
-  console.log(value);
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }
