@@ -51,8 +51,6 @@ export function Header() {
         onClose={toggleMenu}
         userEmail={user?.email}
       />
-
-      <div className="h-[72px]" />
     </>
   );
 }
