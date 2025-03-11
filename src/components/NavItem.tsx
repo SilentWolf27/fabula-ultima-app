@@ -10,7 +10,7 @@ export function NavItem({ to, children }: NavItemProps) {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        `text-xs font-fantasy relative px-2 py-1 transition-colors duration-200 ease-in-out
+        `text-xs md:text-sm font-serif relative px-2 py-1.5 md:py-1 w-full md:w-auto inline-block transition-colors duration-200 ease-in-out
         after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-[2px] after:transition-opacity after:duration-200
         ${
           isActive
