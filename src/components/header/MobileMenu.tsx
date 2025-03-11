@@ -27,7 +27,8 @@ export function MobileMenu({ isOpen, onClose, userEmail }: MobileMenuProps) {
           <div className="flex justify-end">
             <button
               onClick={onClose}
-              className="p-2 text-gray-600 hover:text-gray-900">
+              className="p-2 text-gray-600 hover:text-gray-900"
+              aria-label="Cerrar menú">
               <svg
                 className="w-6 h-6"
                 fill="none"

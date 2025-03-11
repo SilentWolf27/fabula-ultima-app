@@ -27,7 +27,7 @@ export function Header() {
           <button
             onClick={toggleMenu}
             className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
-            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}>
+            aria-label="Abrir menú">
             <svg
               className="w-6 h-6"
               fill="none"
