@@ -9,7 +9,8 @@ import { ProtectedRoute } from "./session/components/ProtectedRoute";
 import { MasterProtectedRoute } from "./session/components/MasterProtectedRoute";
 import { PlayerProtectedRoute } from "./session/components/PlayerProtectedRoute";
 import { ProfilePage } from "./profile/pages/ProfilePage";
-import StoryBuilder from "./pages/StoryBuilder";
+import StoryBuilder from "./story/pages/StoryBuilder";
+import CreateStory from "./story/pages/CreateStory";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
       <Route element={<MasterProtectedRoute />}>
         <Route element={<Layout />}>
           <Route path="creador-historias" element={<StoryBuilder />} />
+          <Route path="creador-historias/crear" element={<CreateStory />} />
         </Route>
       </Route>
 
