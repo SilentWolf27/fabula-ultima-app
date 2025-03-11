@@ -19,7 +19,8 @@ export default function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="characters" element={<Characters />} />
+          <Route path="personajes" element={<Characters />} />
+          <Route path="historias" element={<Characters />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Route>

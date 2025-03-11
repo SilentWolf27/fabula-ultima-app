@@ -14,9 +14,10 @@ export function Header() {
       </Link>
 
       <nav className="flex items-center gap-8">
-        <div className="flex gap-4">
-          <NavItem to="/characters">Characters</NavItem>
-        </div>
+        <ul className="flex gap-4">
+          <NavItem to="/personajes">Personajes</NavItem>
+          <NavItem to="/historias">Historias</NavItem>
+        </ul>
 
         <div className="flex items-center gap-4 pl-4 border-l border-gray-200">
           <span className="text-sm text-gray-600">{user?.email}</span>
