@@ -1,14 +1,14 @@
 import { MouseEventHandler } from "react";
 import { NavItem } from "./NavItem";
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
 
-interface MobileMenuProps {
+interface Props {
   isOpen: boolean;
   onClose: MouseEventHandler<any>;
   userEmail?: string | null;
 }
 
-export function MobileMenu({ isOpen, onClose, userEmail }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, userEmail }: Props) {
   const firstLetter = userEmail?.charAt(0).toUpperCase() || "?";
 
   return (
