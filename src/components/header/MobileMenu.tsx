@@ -1,13 +1,16 @@
 import { MouseEventHandler } from "react";
 import { NavItem } from "./NavItem";
+import { Link, NavLink } from "react-router";
 
 interface MobileMenuProps {
   isOpen: boolean;
-  onClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement>;
+  onClose: MouseEventHandler<any>;
   userEmail?: string | null;
 }
 
 export function MobileMenu({ isOpen, onClose, userEmail }: MobileMenuProps) {
+  const firstLetter = userEmail?.charAt(0).toUpperCase() || "?";
+
   return (
     <>
       {/* Overlay */}
@@ -43,15 +46,26 @@ export function MobileMenu({ isOpen, onClose, userEmail }: MobileMenuProps) {
           </div>
 
           <nav className="mt-8">
-            <ul className="flex flex-col gap-6">
+            {/* User section */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm ring-2 ring-indigo-100">
+                {firstLetter}
+              </div>
+              <span className="text-sm text-gray-600">{userEmail}</span>
+            </div>
+
+            <ul className="flex flex-col gap-6" onClick={onClose}>
               <NavItem to="/personajes">Personajes</NavItem>
               <NavItem to="/historias">Historias</NavItem>
             </ul>
 
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <span className="text-xs text-gray-600 font-fantasy">
-                {userEmail}
-              </span>
+            <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col gap-4">
+              <NavLink
+                to="/perfil"
+                className="text-sm text-gray-700 hover:text-indigo-600"
+                onClick={onClose}>
+                Tu Perfil
+              </NavLink>
             </div>
           </nav>
         </div>

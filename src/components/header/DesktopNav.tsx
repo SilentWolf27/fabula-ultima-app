@@ -1,10 +1,11 @@
 import { NavItem } from "./NavItem";
+import { UserMenu } from "./UserMenu";
 
-interface DesktopNavProps {
+interface Props {
   userEmail?: string | null;
 }
 
-export function DesktopNav({ userEmail }: DesktopNavProps) {
+export function DesktopNav({ userEmail }: Props) {
   return (
     <nav className="hidden lg:flex items-center gap-8">
       <ul className="flex gap-6">
@@ -13,7 +14,7 @@ export function DesktopNav({ userEmail }: DesktopNavProps) {
       </ul>
 
       <div className="flex items-center gap-4 pl-4 border-l border-gray-200">
-        <span className="text-sm text-gray-600">{userEmail}</span>
+        <UserMenu userEmail={userEmail} />
       </div>
     </nav>
   );
