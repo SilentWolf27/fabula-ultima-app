@@ -2,14 +2,18 @@ import { MouseEventHandler } from "react";
 import { NavItem } from "./NavItem";
 import { NavLink } from "react-router";
 import LogoutButton from "../../auth/components/LogoutButton";
+import { useNavbar } from "../../hooks/useNavbar";
+import { UserWithProfile } from "../../session/interfaces/session";
+
 interface Props {
   isOpen: boolean;
   onClose: MouseEventHandler<any>;
-  userEmail?: string | null;
+  user: UserWithProfile;
 }
 
-export function MobileMenu({ isOpen, onClose, userEmail }: Props) {
-  const firstLetter = userEmail?.charAt(0).toUpperCase() || "?";
+export function MobileMenu({ isOpen, onClose, user }: Props) {
+  const firstLetter = user.email?.charAt(0).toUpperCase() || "?";
+  const { items } = useNavbar({ user });
 
   return (
     <>
@@ -45,24 +49,27 @@ export function MobileMenu({ isOpen, onClose, userEmail }: Props) {
             </button>
           </div>
 
-          <nav className="mt-8">
+          <nav>
             {/* User section */}
             <div className="flex items-center gap-3 mb-8">
               <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm ring-2 ring-indigo-100">
                 {firstLetter}
               </div>
-              <span className="text-sm text-gray-600">{userEmail}</span>
+              <span className="text-sm text-gray-600">{user.email}</span>
             </div>
 
             <ul className="flex flex-col gap-6" onClick={onClose}>
-              <NavItem to="/personajes">Personajes</NavItem>
-              <NavItem to="/historias">Historias</NavItem>
+              {items.map((item) => (
+                <NavItem key={item.to} to={item.to}>
+                  {item.label}
+                </NavItem>
+              ))}
             </ul>
 
             <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col gap-4">
               <NavLink
                 to="/perfil"
-                className="text-sm text-gray-700 hover:text-indigo-600 px-2 py-1"
+                className="text-sm text-gray-700 hover:text-indigo-600"
                 onClick={onClose}>
                 Tu Perfil
               </NavLink>

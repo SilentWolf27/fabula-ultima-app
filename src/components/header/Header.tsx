@@ -22,7 +22,7 @@ export function Header() {
             </h1>
           </Link>
 
-          <DesktopNav userEmail={user?.email} />
+          <DesktopNav user={user!} />
 
           <button
             onClick={toggleMenu}
@@ -46,11 +46,7 @@ export function Header() {
         </div>
       </header>
 
-      <MobileMenu
-        isOpen={isMenuOpen}
-        onClose={toggleMenu}
-        userEmail={user?.email}
-      />
+      <MobileMenu isOpen={isMenuOpen} onClose={toggleMenu} user={user!} />
     </>
   );
 }
