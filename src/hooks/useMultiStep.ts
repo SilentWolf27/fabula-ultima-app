@@ -16,7 +16,7 @@ export function useMultiStep<T extends FieldValues>({
   schema,
 }: UseMultiStepProps<T>) {
   const [currentStep, setCurrentStep] = useState(0);
-  const { handleSubmit, register, formState, trigger } = useForm<T>({
+  const { handleSubmit, register, formState, trigger, setError } = useForm<T>({
     resolver: zodResolver(schema),
     defaultValues,
   });
@@ -62,6 +62,7 @@ export function useMultiStep<T extends FieldValues>({
     goTo,
     handleSubmit,
     register,
+    setError,
     formState,
   };
 }

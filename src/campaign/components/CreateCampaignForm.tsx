@@ -4,6 +4,8 @@ import { MultiStepFormHeader } from "../../components/multi-step/MultiStepFormHe
 import { createCampaignSchema, CreateCampaignValues } from "../schemas/create";
 import { BasicInfo } from "./steps/BasicInfo";
 import { Settings } from "./steps/Settings";
+import { createCampaign } from "../api/create";
+import { useNavigate } from "react-router";
 
 const steps: Step[] = [
   {
@@ -40,6 +42,8 @@ const defaultValues: CreateCampaignValues = {
 };
 
 export function CreateCampaignForm() {
+  const navigate = useNavigate();
+
   const {
     currentStep,
     currentStepId,
@@ -50,6 +54,7 @@ export function CreateCampaignForm() {
     back,
     handleSubmit,
     register,
+    setError,
     formState,
   } = useMultiStep<CreateCampaignValues>({
     steps,
@@ -57,8 +62,15 @@ export function CreateCampaignForm() {
     defaultValues,
   });
 
-  const onSubmit = (data: CreateCampaignValues) => {
-    console.log(data);
+  const onSubmit = async (data: CreateCampaignValues) => {
+    const { error, success } = await createCampaign(data);
+
+    if (error) {
+      setError("root.serverError", { message: error.message });
+      return;
+    }
+
+    if (success) navigate("/campaigns");
   };
 
   const handleNext = async (e: React.MouseEvent) => {
@@ -104,6 +116,12 @@ export function CreateCampaignForm() {
             </button>
           )}
         </div>
+
+        {formState.errors.root?.serverError && (
+          <p className="mt-2 text-sm text-red-500">
+            {formState.errors.root.serverError.message}
+          </p>
+        )}
       </form>
     </div>
   );
