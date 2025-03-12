@@ -1,7 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
-import { createClient } from "../../supabase/clients/browser";
-import type { SessionContextValue, UserWithProfile } from "../interfaces/session";
+import { createClient } from "@/supabase/clients/browser";
+import type {
+  SessionContextValue,
+  UserWithProfile,
+} from "../interfaces/session";
 import { getProfileFromSession } from "../utils/claims";
 
 const defaultValue: SessionContextValue = {
@@ -65,5 +68,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     isAuthenticated: !!session,
   };
 
-  return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
+  return (
+    <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
+  );
 }

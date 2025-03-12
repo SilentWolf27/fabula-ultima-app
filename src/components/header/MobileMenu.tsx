@@ -1,9 +1,9 @@
 import { MouseEventHandler } from "react";
 import { NavItem } from "./NavItem";
 import { NavLink } from "react-router";
-import LogoutButton from "../../auth/components/LogoutButton";
-import { useNavbar } from "../../hooks/useNavbar";
-import { UserWithProfile } from "../../session/interfaces/session";
+import LogoutButton from "@/auth/components/LogoutButton";
+import { useNavbar } from "@/hooks/useNavbar";
+import { UserWithProfile } from "@/session/interfaces/session";
 
 interface Props {
   isOpen: boolean;

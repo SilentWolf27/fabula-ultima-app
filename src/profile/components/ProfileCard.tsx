@@ -1,4 +1,4 @@
-import type { UserWithProfile } from "../../session/interfaces/session";
+import type { UserWithProfile } from "@/session/interfaces/session";
 
 interface Props {
   user: UserWithProfile;

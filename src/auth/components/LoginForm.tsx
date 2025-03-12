@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData, loginSchema } from "../schemas/login";
 import { useAuth } from "../hooks/useAuth";
-import { buildErrorFromSupabase } from "../../supabase/errors/supabase";
+import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
 
 export function LoginForm() {
   const { login } = useAuth();

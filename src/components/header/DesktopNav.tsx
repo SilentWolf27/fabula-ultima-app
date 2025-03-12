@@ -1,7 +1,7 @@
 import { NavItem } from "./NavItem";
 import { UserMenu } from "./UserMenu";
-import { useNavbar } from "../../hooks/useNavbar";
-import { UserWithProfile } from "../../session/interfaces/session";
+import { useNavbar } from "@/hooks/useNavbar";
+import { UserWithProfile } from "@/session/interfaces/session";
 
 interface Props {
   user: UserWithProfile;

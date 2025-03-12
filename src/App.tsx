@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router";
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import Characters from "./pages/Characters";
-import ErrorPage from "./pages/ErrorPage";
-import Login from "./auth/pages/Login";
-import { AuthRoute } from "./session/components/AuthRoute";
-import { ProtectedRoute } from "./session/components/ProtectedRoute";
-import { MasterProtectedRoute } from "./session/components/MasterProtectedRoute";
-import { PlayerProtectedRoute } from "./session/components/PlayerProtectedRoute";
-import { ProfilePage } from "./profile/pages/ProfilePage";
-import StoryBuilder from "./story/pages/StoryBuilder";
-import CreateStory from "./story/pages/CreateStory";
+import Layout from "@/components/Layout";
+import Home from "@/pages/Home";
+import Characters from "@/pages/Characters";
+import ErrorPage from "@/pages/ErrorPage";
+import Login from "@/auth/pages/Login";
+import { AuthRoute } from "@/session/components/AuthRoute";
+import { ProtectedRoute } from "@/session/components/ProtectedRoute";
+import { MasterProtectedRoute } from "@/session/components/MasterProtectedRoute";
+import { PlayerProtectedRoute } from "@/session/components/PlayerProtectedRoute";
+import { ProfilePage } from "@/profile/pages/ProfilePage";
+import CampaignBuilder from "@/campaign/pages/CampaignBuilder";
+import CreateCampaign from "@/campaign/pages/CreateCampaign";
 
 export default function App() {
   return (
@@ -32,8 +32,8 @@ export default function App() {
       {/* Master routes */}
       <Route element={<MasterProtectedRoute />}>
         <Route element={<Layout />}>
-          <Route path="creador-historias" element={<StoryBuilder />} />
-          <Route path="creador-historias/crear" element={<CreateStory />} />
+          <Route path="creador-historias" element={<CampaignBuilder />} />
+          <Route path="creador-historias/crear" element={<CreateCampaign />} />
         </Route>
       </Route>
 

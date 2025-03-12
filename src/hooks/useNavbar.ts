@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { UserWithProfile } from "../session/interfaces/session";
+import { UserWithProfile } from "@/session/interfaces/session";
 
 interface NavItem {
   to: string;

@@ -1,4 +1,4 @@
-import { createClient } from "../../supabase/clients/browser";
+import { createClient } from "@/supabase/clients/browser";
 import { useNavigate } from "react-router";
 import { LoginFormData } from "../schemas/login";
 

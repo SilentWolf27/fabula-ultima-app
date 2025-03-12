@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useSession } from "../../session/context/SessionContext";
+import { useSession } from "@/session/context/SessionContext";
 import { useState, MouseEventHandler } from "react";
 import { MobileMenu } from "./MobileMenu";
 import { DesktopNav } from "./DesktopNav";
