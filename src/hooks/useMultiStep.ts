@@ -53,7 +53,6 @@ export function useMultiStep<T extends FieldValues>({
 
   return {
     currentStep,
-    currentStepId: steps[currentStep].id,
     steps,
     isFirstStep,
     isLastStep,

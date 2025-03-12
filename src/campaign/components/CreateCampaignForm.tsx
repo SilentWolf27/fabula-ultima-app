@@ -17,16 +17,9 @@ const steps: Step[] = [
   },
 ];
 
-const stepComponents = {
-  basic: BasicInfo,
-  settings: () => <div>Settings</div>,
-  media: () => <div>Media</div>,
-};
-
 export function CreateCampaignForm() {
   const {
     currentStep,
-    currentStepId,
     steps: formSteps,
     isFirstStep,
     isLastStep,
