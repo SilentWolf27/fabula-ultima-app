@@ -29,9 +29,6 @@ This app aims to solve these problems by:
 - **PostgreSQL** for data storage.
 - **Supabase Storage** for images.
 
-### **Extras**
-- **Vitest and React Testing Library** for unit and integration testing.
-
 ---
 
 ## How to Run the Project
