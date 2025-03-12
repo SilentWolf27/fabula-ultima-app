@@ -1,7 +1,5 @@
-interface Step {
-  id: string;
-  title: string;
-}
+import { Step } from "./types";
+import { Fragment } from "react";
 
 interface Props {
   steps: Step[];
@@ -13,8 +11,8 @@ export function MultiStepFormHeader({ steps, currentStep }: Props) {
     <nav aria-label="Progress" className="w-full font-body">
       <ol className="flex items-start justify-between gap-3">
         {steps.map((step, index) => (
-          <>
-            <li key={step.id} className="flex items-center flex-col gap-2">
+          <Fragment key={step.id}>
+            <li className="flex items-center flex-col gap-2">
               <span
                 className={`
                   flex h-10 w-10 items-center justify-center rounded-full
@@ -67,7 +65,7 @@ export function MultiStepFormHeader({ steps, currentStep }: Props) {
                   index < currentStep ? "bg-indigo-600" : "bg-gray-200"
                 }`}></div>
             )}
-          </>
+          </Fragment>
         ))}
       </ol>
     </nav>

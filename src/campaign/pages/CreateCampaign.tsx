@@ -1,11 +1,11 @@
-import { PageContainer } from "../../components/page/PageContainer";
-import { PageHeader } from "../../components/page/PageHeader";
+import { PageContainer } from "@/components/page/PageContainer";
+import { PageHeader } from "@/components/page/PageHeader";
 import { CreateCampaignForm } from "../components/CreateCampaignForm";
 
 export default function CreateCampaign() {
   return (
     <PageContainer>
-      <PageHeader title="Crear nueva campaña" backTo="/creador-historias" />
+      <PageHeader title="Crear Campaña" />
       <CreateCampaignForm />
     </PageContainer>
   );
