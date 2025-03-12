@@ -3,6 +3,7 @@ import { Step } from "../../components/multi-step/types";
 import { MultiStepFormHeader } from "../../components/multi-step/MultiStepFormHeader";
 import { createCampaignSchema, CreateCampaignValues } from "../schemas/create";
 import { BasicInfo } from "./steps/BasicInfo";
+import { Settings } from "./steps/Settings";
 
 const steps: Step[] = [
   {
@@ -12,14 +13,35 @@ const steps: Step[] = [
   },
   {
     id: "settings",
-    title: "Configuración",
-    fields: ["target", "budget"],
+    title: "Opciones",
+    fields: [
+      "settings.initialLevel",
+      "settings.maxLevel",
+      "settings.maxPlayers",
+      "settings.xpInitial",
+      "settings.initialZenit",
+    ],
   },
 ];
+
+const defaultValues: CreateCampaignValues = {
+  name: "",
+  description: "",
+  settings: {
+    initialLevel: 3,
+    maxLevel: 100,
+    maxPlayers: 6,
+    xpInitial: 0,
+    initialZenit: 500,
+    initialFabulaPoints: 2,
+    characterCreation: "default_points",
+  },
+};
 
 export function CreateCampaignForm() {
   const {
     currentStep,
+    currentStepId,
     steps: formSteps,
     isFirstStep,
     isLastStep,
@@ -31,6 +53,7 @@ export function CreateCampaignForm() {
   } = useMultiStep<CreateCampaignValues>({
     steps,
     schema: createCampaignSchema,
+    defaultValues,
   });
 
   const onSubmit = (data: CreateCampaignValues) => {
@@ -43,7 +66,12 @@ export function CreateCampaignForm() {
 
       {/* Step Content */}
       <form onSubmit={handleSubmit(onSubmit)} className="mt-8 mb-8">
-        <BasicInfo register={register} errors={formState.errors} />
+        {currentStepId === "basic" && (
+          <BasicInfo register={register} errors={formState.errors} />
+        )}
+        {currentStepId === "settings" && (
+          <Settings register={register} errors={formState.errors} />
+        )}
       </form>
 
       {/* Navigation */}
