@@ -17,38 +17,38 @@ export const StoryStatusColors: Record<StoryStatus, StatusColors> = {
   draft: {
     text: "text-gray-700",
     bg: "bg-gray-50",
-    border: "border-gray-200"
+    border: "border-gray-200",
   },
   active: {
     text: "text-green-700",
     bg: "bg-green-50",
-    border: "border-green-200"
+    border: "border-green-200",
   },
   in_progress: {
     text: "text-blue-700",
     bg: "bg-blue-50",
-    border: "border-blue-200"
+    border: "border-blue-200",
   },
   on_hold: {
     text: "text-yellow-700",
     bg: "bg-yellow-50",
-    border: "border-yellow-200"
+    border: "border-yellow-200",
   },
   cancelled: {
     text: "text-red-700",
     bg: "bg-red-50",
-    border: "border-red-200"
+    border: "border-red-200",
   },
   completed: {
     text: "text-purple-700",
     bg: "bg-purple-50",
-    border: "border-purple-200"
+    border: "border-purple-200",
   },
   archived: {
     text: "text-gray-700",
     bg: "bg-gray-50",
-    border: "border-gray-200"
-  }
+    border: "border-gray-200",
+  },
 };
 
 export const StatusLabel: Record<StoryStatus, string> = {
@@ -74,7 +74,7 @@ export interface CampaignSettings {
 }
 
 export interface Campaign {
-  id: number;
+  id: string;
   master_id: string;
   name: string;
   description: string | null;

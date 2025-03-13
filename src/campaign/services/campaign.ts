@@ -16,6 +16,8 @@ type CreateCampaignResponse = Response<Campaign | null>;
 
 type GetCampaignResponse = Response<Campaign | null>;
 
+type DeleteCampaignResponse = Response<Partial<Campaign> | null>;
+
 export async function createCampaign(
   campaign: CreateCampaignValues
 ): Promise<CreateCampaignResponse> {
@@ -47,6 +49,7 @@ export async function getCampaigns(): Promise<GetAllCampaignsResponse> {
   const { data, error } = await supabase
     .from("campaigns")
     .select("id, name, description, status, cover_url")
+    .is("deleted_at", null)
     .overrideTypes<Campaign[]>();
 
   if (error) {
@@ -66,6 +69,7 @@ export async function getCampaign(id: string): Promise<GetCampaignResponse> {
       "id, name, description, status, cover_url, map_url, is_public, created_at, settings"
     )
     .eq("id", id)
+    .is("deleted_at", null)
     .single()
     .overrideTypes<Campaign>();
 
@@ -79,4 +83,17 @@ export async function updateCampaign(
   campaign: Campaign
 ): Promise<unknown> {
   return;
+}
+
+export async function deleteCampaign(
+  id: string
+): Promise<DeleteCampaignResponse> {
+  const { error } = await supabase
+    .from("campaigns")
+    .update({ deleted_at: new Date() })
+    .eq("id", id);
+
+  if (error) return { error: buildErrorFromSupabase(error), data: null };
+
+  return { error: null, data: { id } };
 }
