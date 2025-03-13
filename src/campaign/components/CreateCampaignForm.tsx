@@ -4,7 +4,6 @@ import { MultiStepFormHeader } from "../../components/multi-step/MultiStepFormHe
 import { createCampaignSchema, CreateCampaignValues } from "../schemas/create";
 import { BasicInfo } from "./steps/BasicInfo";
 import { Settings } from "./steps/Settings";
-import { createCampaign } from "../services/create";
 import { useNavigate } from "react-router";
 
 const steps: Step[] = [
@@ -62,16 +61,7 @@ export function CreateCampaignForm() {
     defaultValues,
   });
 
-  const onSubmit = async (data: CreateCampaignValues) => {
-    const { error, success } = await createCampaign(data);
-
-    if (error) {
-      setError("root.serverError", { message: error.message });
-      return;
-    }
-
-    if (success) navigate("/creador-historias");
-  };
+  const onSubmit = async (data: CreateCampaignValues) => {};
 
   const handleNext = async (e: React.MouseEvent) => {
     e.preventDefault();
