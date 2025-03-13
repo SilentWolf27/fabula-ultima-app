@@ -5,7 +5,7 @@ import { createCampaignSchema, CreateCampaignValues } from "../schemas/create";
 import { BasicInfo } from "./steps/BasicInfo";
 import { Settings } from "./steps/Settings";
 import { useNavigate } from "react-router";
-
+import { useCreateCampaign } from "../hooks/mutations/useCreateCampaign";
 const steps: Step[] = [
   {
     id: "basic",
@@ -43,6 +43,13 @@ const defaultValues: CreateCampaignValues = {
 export function CreateCampaignForm() {
   const navigate = useNavigate();
 
+  const { mutate: createCampaign, isPending } = useCreateCampaign({
+    onSuccess: () => navigate("/campaigns"),
+    onError: (error: Error) => {
+      setError("root.serverError", { message: error.message });
+    },
+  });
+
   const {
     currentStep,
     currentStepId,
@@ -61,7 +68,9 @@ export function CreateCampaignForm() {
     defaultValues,
   });
 
-  const onSubmit = async (data: CreateCampaignValues) => {};
+  const onSubmit = async (data: CreateCampaignValues) => {
+    createCampaign(data);
+  };
 
   const handleNext = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -94,8 +103,9 @@ export function CreateCampaignForm() {
           {isLastStep ? (
             <button
               type="submit"
+              disabled={isPending}
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Completar
+              {isPending ? "Creando..." : "Completar"}
             </button>
           ) : (
             <button

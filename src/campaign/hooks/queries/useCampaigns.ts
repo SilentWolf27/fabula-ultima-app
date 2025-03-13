@@ -4,7 +4,7 @@ import { campaignKeys } from "../keys/campaignKeys";
 
 export function useCampaigns() {
   return useQuery({
-    queryKey: campaignKeys.list(),
+    queryKey: campaignKeys.lists(),
     queryFn: getCampaigns,
   });
 }
