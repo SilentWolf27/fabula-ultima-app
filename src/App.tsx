@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, Router } from "react-router";
 import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import Characters from "@/pages/Characters";
@@ -11,7 +11,7 @@ import { PlayerProtectedRoute } from "@/session/components/PlayerProtectedRoute"
 import { ProfilePage } from "@/profile/pages/ProfilePage";
 import CampaignBuilder from "@/campaign/pages/MasterCampaigns";
 import CreateCampaign from "@/campaign/pages/CreateCampaign";
-
+import CampaignDetail from "@/campaign/pages/CampaignDetail";
 export default function App() {
   return (
     <Routes>
@@ -34,6 +34,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="creador-historias" element={<CampaignBuilder />} />
           <Route path="creador-historias/crear" element={<CreateCampaign />} />
+          <Route path="creador-historias/:id" element={<CampaignDetail />} />
         </Route>
       </Route>
 

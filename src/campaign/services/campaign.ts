@@ -5,15 +5,16 @@ import { Campaign } from "../interfaces/campaign";
 
 const supabase = createClient();
 
-type GetAllCampaignsResponse = {
-  data: Campaign[];
+type Response<T> = {
+  data: T;
   error: Error | null;
 };
 
-type CreateCampaignResponse = {
-  data: Campaign | null;
-  error: Error | null;
-};
+type GetAllCampaignsResponse = Response<Campaign[]>;
+
+type CreateCampaignResponse = Response<Campaign | null>;
+
+type GetCampaignResponse = Response<Campaign | null>;
 
 export async function createCampaign(
   campaign: CreateCampaignValues
@@ -58,8 +59,19 @@ export async function getCampaigns(): Promise<GetAllCampaignsResponse> {
   return { data, error: null };
 }
 
-export async function getCampaign(id: string): Promise<unknown> {
-  return;
+export async function getCampaign(id: string): Promise<GetCampaignResponse> {
+  const { data, error } = await supabase
+    .from("campaigns")
+    .select(
+      "id, name, description, status, cover_url, map_url, is_public, created_at, settings"
+    )
+    .eq("id", id)
+    .single()
+    .overrideTypes<Campaign>();
+
+  if (error) return { error: buildErrorFromSupabase(error), data: null };
+
+  return { error: null, data };
 }
 
 export async function updateCampaign(
