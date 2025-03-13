@@ -16,6 +16,7 @@ export function BasicInfo({ register, errors }: Props) {
             {...register("name")}
             placeholder="Escribe el nombre de la campaña"
             className="peer w-full appearance-none border-0 border-b-2 border-gray-300 placeholder:text-transparent px-0 py-2 text-gray-900 focus:border-indigo-600 outline-none"
+            autoComplete="off"
           />
           <label
             htmlFor="name"

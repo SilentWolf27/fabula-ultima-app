@@ -70,7 +70,7 @@ export function CreateCampaignForm() {
       return;
     }
 
-    if (success) navigate("/campaigns");
+    if (success) navigate("/creador-historias");
   };
 
   const handleNext = async (e: React.MouseEvent) => {

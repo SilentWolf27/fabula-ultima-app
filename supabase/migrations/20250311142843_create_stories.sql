@@ -20,7 +20,7 @@ create or replace function public.is_master()
 returns boolean as $$
 begin
   return coalesce(
-    auth.jwt() ->> 'role' = 'master',
+    (auth.jwt() -> 'profile' ->> 'role') = 'master',
     false
   );
 end;
