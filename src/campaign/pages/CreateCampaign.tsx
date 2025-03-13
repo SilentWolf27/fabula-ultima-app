@@ -5,7 +5,7 @@ import { CreateCampaignForm } from "../components/CreateCampaignForm";
 export default function CreateCampaign() {
   return (
     <PageContainer>
-      <PageHeader title="Crear Campaña" />
+      <PageHeader title="Crear Historia" />
       <CreateCampaignForm />
     </PageContainer>
   );

@@ -14,14 +14,14 @@ export function BasicInfo({ register, errors }: Props) {
           <input
             type="text"
             {...register("name")}
-            placeholder="Escribe el nombre de la campaña"
+            placeholder="Escribe el nombre de la historia"
             className="peer w-full appearance-none border-0 border-b-2 border-gray-300 placeholder:text-transparent px-0 py-2 text-gray-900 focus:border-indigo-600 outline-none"
             autoComplete="off"
           />
           <label
             htmlFor="name"
             className="absolute left-0 top-3 -z-10 origin-[0] -translate-y-6 scale-85 transform text-gray-800 duration-300 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-85 peer-focus:text-indigo-600">
-            Nombre de la campaña
+            Nombre de la historia
           </label>
         </div>
         {errors.name && (
@@ -33,13 +33,13 @@ export function BasicInfo({ register, errors }: Props) {
         <div className="relative">
           <textarea
             {...register("description")}
-            placeholder="Describe tu campaña"
+            placeholder="Describe tu historia"
             className="peer w-full appearance-none border-0 border-b-2 border-gray-300 placeholder:text-transparent px-0 py-2 text-gray-900 focus:border-indigo-600 outline-none resize-none field-sizing-content"
           />
           <label
             htmlFor="description"
             className="absolute left-0 top-3 -z-10 origin-[0] -translate-y-6 scale-85 transform text-gray-800 duration-300 peer-placeholder-shown:text-gray-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-85 peer-focus:text-indigo-600">
-            Describe tu campaña
+            Describe tu historia
           </label>
         </div>
         {errors.description && (
