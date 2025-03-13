@@ -4,6 +4,10 @@ import App from "./App";
 import { BrowserRouter } from "react-router";
 import "./index.css";
 import { SessionProvider } from "./session/context/SessionContext";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { queryClient } from "@/lib/react-query";
+
 const root = document.getElementById("root");
 
 if (!root) {
@@ -12,10 +16,13 @@ if (!root) {
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <SessionProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </SessionProvider>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </SessionProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
