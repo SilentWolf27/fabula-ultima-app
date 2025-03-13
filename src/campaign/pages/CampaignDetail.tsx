@@ -1,5 +1,4 @@
 import { useParams, Navigate } from "react-router";
-import { PageHeader } from "@/components/page/PageHeader";
 import { PageContainer } from "@/components/page/PageContainer";
 import { useCampaign } from "../hooks/queries/useCampaign";
 import { Loading } from "@/components/Loading";
@@ -16,7 +15,7 @@ export default function CampaignDetail() {
 
   if (isLoading) return <Loading fullScreen />;
 
-  if (!campaign) return null; //TODO: Replace with 404 page
+  if (!campaign || error) return null; //TODO: Replace with 404 page
 
   return (
     <PageContainer>
