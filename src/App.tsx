@@ -9,7 +9,7 @@ import { ProtectedRoute } from "@/session/components/ProtectedRoute";
 import { MasterProtectedRoute } from "@/session/components/MasterProtectedRoute";
 import { PlayerProtectedRoute } from "@/session/components/PlayerProtectedRoute";
 import { ProfilePage } from "@/profile/pages/ProfilePage";
-import CampaignBuilder from "@/campaign/pages/CampaignBuilder";
+import CampaignBuilder from "@/campaign/pages/MasterCampaigns";
 import CreateCampaign from "@/campaign/pages/CreateCampaign";
 
 export default function App() {

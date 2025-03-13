@@ -4,7 +4,7 @@ import { MultiStepFormHeader } from "../../components/multi-step/MultiStepFormHe
 import { createCampaignSchema, CreateCampaignValues } from "../schemas/create";
 import { BasicInfo } from "./steps/BasicInfo";
 import { Settings } from "./steps/Settings";
-import { createCampaign } from "../api/create";
+import { createCampaign } from "../services/create";
 import { useNavigate } from "react-router";
 
 const steps: Step[] = [
