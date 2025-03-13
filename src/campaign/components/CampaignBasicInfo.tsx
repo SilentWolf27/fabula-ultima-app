@@ -19,7 +19,7 @@ export function CampaignBasicInfo({ campaign }: Props) {
       onSuccess: () => {
         navigate("/creador-historias");
       },
-      onError: (error) => {},
+      onError: (_error) => {},
     });
 
   const handleDelete = async () => {
@@ -51,6 +51,7 @@ export function CampaignBasicInfo({ campaign }: Props) {
         </svg>
       </Link>
       <button
+        disabled={isDeleting}
         onClick={handleDelete}
         className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
           isOverlay
