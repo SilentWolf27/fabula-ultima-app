@@ -16,6 +16,8 @@ type CreateCampaignResponse = Response<Campaign | null>;
 
 type GetCampaignResponse = Response<Campaign | null>;
 
+type UpdateCampaignResponse = Response<Campaign | null>;
+
 type DeleteCampaignResponse = Response<Partial<Campaign> | null>;
 
 export async function createCampaign(
@@ -79,10 +81,19 @@ export async function getCampaign(id: string): Promise<GetCampaignResponse> {
 }
 
 export async function updateCampaign(
-  id: string,
   campaign: Campaign
-): Promise<unknown> {
-  return;
+): Promise<UpdateCampaignResponse> {
+  if (!campaign.id)
+    return { error: buildErrorFromSupabase("No id provided"), data: null };
+
+  const { error } = await supabase
+    .from("campaigns")
+    .update(campaign)
+    .eq("id", campaign.id);
+
+  if (error) return { error: buildErrorFromSupabase(error), data: null };
+
+  return { error: null, data: campaign };
 }
 
 export async function deleteCampaign(
