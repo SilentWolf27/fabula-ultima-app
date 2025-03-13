@@ -118,7 +118,7 @@ export function CreateCampaignForm() {
         </div>
 
         {formState.errors.root?.serverError && (
-          <p className="mt-2 text-sm text-red-500">
+          <p className="mt-2 text-sm text-red-500 bg-red-100 p-2 rounded-md border border-red-200">
             {formState.errors.root.serverError.message}
           </p>
         )}

@@ -29,7 +29,7 @@ $$ language plpgsql stable security definer set search_path = public;
 -- Create campaigns table
 create table campaigns (
   id bigint generated always as identity primary key,
-  master_id uuid references auth.users(id) not null,
+  master_id uuid references auth.users(id) not null default auth.uid(),
   name text not null,
   description text,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
