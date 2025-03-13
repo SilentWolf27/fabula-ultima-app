@@ -12,6 +12,8 @@ import { ProfilePage } from "@/profile/pages/ProfilePage";
 import CampaignBuilder from "@/campaign/pages/MasterCampaigns";
 import CreateCampaign from "@/campaign/pages/CreateCampaign";
 import CampaignDetail from "@/campaign/pages/CampaignDetail";
+import EditCampaign from "@/campaign/pages/EditCampaign";
+
 export default function App() {
   return (
     <Routes>
@@ -35,6 +37,10 @@ export default function App() {
           <Route path="creador-historias" element={<CampaignBuilder />} />
           <Route path="creador-historias/crear" element={<CreateCampaign />} />
           <Route path="creador-historias/:id" element={<CampaignDetail />} />
+          <Route
+            path="creador-historias/:id/editar"
+            element={<EditCampaign />}
+          />
         </Route>
       </Route>
 
