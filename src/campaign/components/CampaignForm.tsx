@@ -1,81 +1,38 @@
-import { useMultiStep } from "../../hooks/useMultiStep";
-import { Step } from "../../components/multi-step/types";
 import { MultiStepFormHeader } from "../../components/multi-step/MultiStepFormHeader";
-import { createCampaignSchema, CreateCampaignValues } from "../schemas/create";
 import { BasicInfo } from "./steps/BasicInfo";
 import { Settings } from "./steps/Settings";
-import { useNavigate } from "react-router";
-import { useCreateCampaign } from "../hooks/mutations/useCreateCampaign";
-const steps: Step[] = [
-  {
-    id: "basic",
-    title: "Información Básica",
-    fields: ["name", "description", "cover"],
-  },
-  {
-    id: "settings",
-    title: "Opciones",
-    fields: [
-      "settings.initialLevel",
-      "settings.maxLevel",
-      "settings.maxPlayers",
-      "settings.xpInitial",
-      "settings.initialZenit",
-      "settings.initialFabulaPoints",
-    ],
-  },
-];
+import { useCampaignForm } from "../hooks/useCampaignForm";
+import { CampaignFormValues } from "../schemas/form";
 
-const defaultValues: CreateCampaignValues = {
-  name: "",
-  description: "",
-  settings: {
-    initialLevel: 3,
-    maxLevel: 100,
-    maxPlayers: 6,
-    xpInitial: 0,
-    initialZenit: 500,
-    initialFabulaPoints: 2,
-    characterCreation: "default_points",
-  },
-};
+interface Props {
+  initialValues?: CampaignFormValues;
+  onSubmit: (data: CampaignFormValues) => void;
+  isSubmitting?: boolean;
+  submitLabel?: string;
+  error?: string;
+}
 
-export function CreateCampaignForm() {
-  const navigate = useNavigate();
-
-  const { mutate: createCampaign, isPending } = useCreateCampaign({
-    onSuccess: () => navigate("/creador-historias"),
-    onError: (error: Error) => {
-      setError("root.serverError", { message: error.message });
-    },
-  });
-
+export function CampaignForm({
+  initialValues,
+  onSubmit,
+  isSubmitting,
+  submitLabel = "Completar",
+  error,
+}: Props) {
   const {
     currentStep,
     currentStepId,
-    steps: formSteps,
+    formSteps,
     isFirstStep,
     isLastStep,
-    next,
     back,
+    handleNext,
     handleSubmit,
     register,
-    setError,
     formState,
-  } = useMultiStep<CreateCampaignValues>({
-    steps,
-    schema: createCampaignSchema,
-    defaultValues,
+  } = useCampaignForm({
+    initialValues,
   });
-
-  const onSubmit = async (data: CreateCampaignValues) => {
-    createCampaign(data);
-  };
-
-  const handleNext = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    next();
-  };
 
   return (
     <div className="w-full max-w-3xl mx-auto">
@@ -103,9 +60,9 @@ export function CreateCampaignForm() {
           {isLastStep ? (
             <button
               type="submit"
-              disabled={isPending}
+              disabled={isSubmitting}
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer">
-              {isPending ? "Creando..." : "Completar"}
+              {isSubmitting ? "Guardando..." : submitLabel}
             </button>
           ) : (
             <button
@@ -117,9 +74,9 @@ export function CreateCampaignForm() {
           )}
         </div>
 
-        {formState.errors.root?.serverError && (
+        {(error || formState.errors.root?.serverError) && (
           <p className="mt-2 text-sm text-red-500 bg-red-100 p-2 rounded-md border border-red-200">
-            {formState.errors.root.serverError.message}
+            {error || formState.errors.root?.serverError?.message}
           </p>
         )}
       </form>

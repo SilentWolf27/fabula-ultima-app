@@ -3,8 +3,8 @@ import { updateCampaign } from "../../services/campaign";
 import { Campaign } from "../../interfaces/campaign";
 
 interface Params {
-  onSuccess: () => void;
-  onError: (error: Error) => void;
+  onSuccess?: () => void;
+  onError?: (error: Error) => void;
 }
 
 export function useUpdateCampaign({
