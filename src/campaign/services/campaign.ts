@@ -1,7 +1,7 @@
 import { createClient } from "@/supabase/clients/browser";
-import { CreateCampaignValues } from "../schemas/create";
 import { buildErrorFromSupabase } from "@/supabase/errors/supabase";
 import { Campaign } from "../interfaces/campaign";
+import { CampaignFormValues } from "../schemas/form";
 
 const supabase = createClient();
 
@@ -21,7 +21,7 @@ type UpdateCampaignResponse = Response<Campaign | null>;
 type DeleteCampaignResponse = Response<Partial<Campaign> | null>;
 
 export async function createCampaign(
-  campaign: CreateCampaignValues
+  campaign: CampaignFormValues
 ): Promise<CreateCampaignResponse> {
   const { data, error } = await supabase
     .from("campaigns")
@@ -86,10 +86,12 @@ export async function updateCampaign(
   if (!campaign.id)
     return { error: buildErrorFromSupabase("No id provided"), data: null };
 
+  const { id, ...updateData } = campaign;
+
   const { error } = await supabase
     .from("campaigns")
-    .update(campaign)
-    .eq("id", campaign.id);
+    .update(updateData)
+    .eq("id", id);
 
   if (error) return { error: buildErrorFromSupabase(error), data: null };
 

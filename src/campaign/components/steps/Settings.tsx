@@ -1,9 +1,9 @@
 import { FieldErrors, UseFormRegister } from "react-hook-form";
-import { CreateCampaignValues } from "../../schemas/create";
+import { CampaignFormValues } from "../../schemas/form";
 
 interface Props {
-  register: UseFormRegister<CreateCampaignValues>;
-  errors: FieldErrors<CreateCampaignValues>;
+  register: UseFormRegister<CampaignFormValues>;
+  errors: FieldErrors<CampaignFormValues>;
 }
 
 export function Settings({ register, errors }: Props) {
